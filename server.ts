@@ -21,7 +21,6 @@ db.exec(`
   )
 `);
 
-// Ruta para registrar usuario
 app.post("/api/register", (req, res) => {
   const { nombre, apellido, email, password, fechaNacimiento } = req.body;
   try {
@@ -31,7 +30,6 @@ app.post("/api/register", (req, res) => {
     stmt.run(nombre, apellido, email, password, fechaNacimiento);
     res.json({ message: "Usuario registrado con éxito" });
   } catch (error) {
-    console.error(error);
     res.status(500).json({ error: "Error al registrar el usuario" });
   }
 });
@@ -41,14 +39,14 @@ app.post("/api/login", (req, res) => {
   try {
     const stmt = db.prepare(`SELECT * FROM users WHERE email = ? AND password = ?`);
     const user = stmt.get(email, password);
+    
     if (user) {
       res.json(user);
     } else {
-      res.status(404).json({ error: "Usuario no encontrado" });
+      res.status(404).json("Usuario o contraseña incorrectos");
     }
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: "Error al buscar el usuario" });
+    res.status(500).json("Usuario o contraseña incorrectos");
   }
 }); 
 // Iniciar servidor en el puerto 5000

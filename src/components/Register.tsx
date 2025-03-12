@@ -4,7 +4,6 @@ import { Container } from "react-bootstrap";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import {DNS,endPoints} from "../Constants/Api";
-
 interface Props {
     onSignUp: (formData: any) => void;
 }
@@ -45,15 +44,14 @@ export const Register: React.FC<Props> = ({  }) => {
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(formData)
             });
-
             if (!response.ok) {
+                console.log("Response:", response);
                 throw new Error(`Error: ${response.status} ${response.statusText}`);
             }
-
             const data = await response.json();
             alert(data.message);
         } catch (error) {
-            console.error("Error en el registro", error);
+            console.error("Error en el registro");
         }
     }
         return (

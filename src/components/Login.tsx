@@ -17,6 +17,7 @@ const Login: React.FC<Props> = ({ }) => {
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
+
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         try {
@@ -26,15 +27,15 @@ const Login: React.FC<Props> = ({ }) => {
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(formData)
             });
-
             if (!response.ok) {
-                throw new Error(`Error: ${response.status} ${response.statusText}`);
+                console.log("Response:", response);
+                throw new Error(`${(await response.text()).toString()}`);
             }
-
             const data = await response.json();
-            alert(data.message);
+            alert("Usuario logueado con éxito" + data.email);
         } catch (error) {
-            console.error("Error en el registro", error);
+            console.error(error);
+            alert(error);
         }
     }
     return (
