@@ -9,7 +9,7 @@ interface Props {
     onLogin: (formData: any) => void;
 }
 
-const Login: React.FC<Props> = ({ }) => {
+export const Login: React.FC<Props> = ({ }) => {
     const [formData, setFormData] = useState({
         email: "",
         password: "",
