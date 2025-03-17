@@ -2,13 +2,14 @@ import { useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import { Container } from "react-bootstrap";
 import { DNS, endPoints } from "../Constants/Api";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 interface Props {
     onLogin: (formData: any) => void;
 }
 
 const Login: React.FC<Props> = ({ }) => {
-
     const [formData, setFormData] = useState({
         email: "",
         password: "",
@@ -32,12 +33,13 @@ const Login: React.FC<Props> = ({ }) => {
                 throw new Error(`${(await response.text()).toString()}`);
             }
             const data = await response.json();
-            alert("Usuario logueado con éxito" + data.email);
+            toast.success("Usuario logueado con éxito: " + data.email);
         } catch (error) {
             console.error(error);
-            alert(error);
+            toast.error("Error: " + error.message);
         }
     }
+
     return (
         <Container className="mt-5 pt-3" style={{ maxWidth: "400px", }}>
             <h2 >Login</h2>
@@ -68,8 +70,17 @@ const Login: React.FC<Props> = ({ }) => {
                     Login
                 </Button>
             </Form>
-
-
+            <ToastContainer 
+                position="top-center"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+            />
         </Container>
     )
 }
