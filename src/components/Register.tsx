@@ -40,14 +40,12 @@ export const Register: React.FC<Props> = ({ }) => {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         try {
-            console.log("Data:", formData);
             const response = await fetch(DNS + "/" + endPoints.REGISTER, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(formData)
             });
             if (!response.ok) {
-                console.log("Response:", response);
                 toast.error("Error en el registro");
                 throw new Error(`Error: ${response.status} ${response.statusText}`);
             }
@@ -55,8 +53,11 @@ export const Register: React.FC<Props> = ({ }) => {
             alert(data.message);
             toast.success("Usuario registrado con éxito: " + data.email);
         } catch (error) {
-            console.error("Error en el registro");
-            toast.error("Error: " + error.message);
+            if (error instanceof Error) {
+                toast.error("Error: " + error.message);
+            } else {
+                toast.error("An unknown error occurred");
+            }
         }
     }
     return (

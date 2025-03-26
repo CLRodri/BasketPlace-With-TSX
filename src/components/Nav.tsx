@@ -2,14 +2,13 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { URLS } from '../Constants/Urls';
 import { Button, Container, Navbar, Nav as BootstrapNav } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
-import { useContext } from 'react';
-import { AuthContext } from '../context/AuthContext';
+import {  useAuth } from '../context/AuthContext';
 import { toast } from 'react-toastify';
 
 
 export const Nav: React.FC = () => {
 
-  const { logout, user } = useContext(AuthContext); // Usar el contexto de autenticación
+  const { logout, isAuthenticated } = useAuth(); // Usar el contexto de autenticación
   const navigate = (url: string) => {
     window.location.href = url;
   }
@@ -17,7 +16,6 @@ export const Nav: React.FC = () => {
     logout(); // Usar el método logout del contexto
     toast.info("Usuario deslogueado con éxito");
   };
-  console.log(user);
   return (
     <Navbar bg="dark" variant="dark" expand="lg" className='w-100 fixed-top'>
       <Container fluid className='px-5'>
@@ -45,7 +43,7 @@ export const Nav: React.FC = () => {
 
           {/* Botones de Login y Sign Up */}
           {
-            user?.logged ? ( // Verificar el estado del usuario desde el contexto
+           isAuthenticated ? ( // Verificar el estado del usuario desde el contexto
               <BootstrapNav>
                 <Button variant="outline-light" className="me-2" onClick={() => navigate(URLS.PROFILE)}>
                   Perfil

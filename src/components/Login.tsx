@@ -4,15 +4,15 @@ import { Container } from "react-bootstrap";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { User } from "../types/User";
-import { AuthContext } from "../context/AuthContext";
+import { AuthContext, useAuth } from "../context/AuthContext";
 
 interface Props {
     onLogin: (formData: User) => void;
 }
 
 export const Login: React.FC<Props> = () => {
-    const { login, logout, user } = useContext(AuthContext); // Usar el contexto de autenticación
-
+    const { login, isAuthenticated } = useAuth(); // Obtener el método login del contexto
+    
     const [formData, setFormData] = useState<User>({
         email: "",
         password: "",
@@ -36,20 +36,12 @@ export const Login: React.FC<Props> = () => {
         }
     };
 
-    const handleSignOut = () => {
-        logout(); // Usar el método logout del contexto
-        toast.info("Usuario deslogueado con éxito");
-    };
-
     return (
         <Container className="mt-5 pt-3" style={{ maxWidth: "400px" }}>
             {
-            user?.logged ? ( // Verificar el estado del usuario desde el contexto
+            isAuthenticated ? ( // Verificar el estado del usuario desde el contexto
                 <div className="text-center">
                     <h2>Bienvenido</h2>
-                    <Button variant="danger" onClick={handleSignOut} className="mt-3">
-                        Sign Out
-                    </Button>
                 </div>
             ) : (
                 <>
