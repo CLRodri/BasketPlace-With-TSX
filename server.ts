@@ -1,6 +1,7 @@
 import * as express from "express";
 import * as cors from "cors";
 import * as Database from "better-sqlite3";
+
 // Inicializa Express
 const app = express();
 app.use(express.json());

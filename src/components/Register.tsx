@@ -140,7 +140,7 @@ export const Register: React.FC<Props> = ({ }) => {
             </Form>
             <ToastContainer
                 position="top-center"
-                autoClose={5000}
+                autoClose={1000}
                 hideProgressBar={false}
                 newestOnTop={false}
                 closeOnClick
