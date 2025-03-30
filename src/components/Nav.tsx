@@ -8,7 +8,7 @@ import { toast } from 'react-toastify';
 
 export const Nav: React.FC = () => {
 
-  const { logout, isAuthenticated } = useAuth(); // Usar el contexto de autenticación
+  const { logout, isAuthenticated} = useAuth(); // Usar el contexto de autenticación
   const navigate = (url: string) => {
     window.location.href = url;
   }

@@ -1,10 +1,10 @@
-import { useState, useContext } from "react";
+import { useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import { Container } from "react-bootstrap";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { User } from "../types/User";
-import { AuthContext, useAuth } from "../context/AuthContext";
+import {  useAuth } from "../context/AuthContext";
 
 interface Props {
     onLogin: (formData: User) => void;
@@ -30,6 +30,7 @@ export const Login: React.FC<Props> = () => {
         e.preventDefault();
         try {
             await login(formData); // Usar el método login del contexto
+            
         } catch (error) {
             console.error(error);
             toast.error("Error: " + error);

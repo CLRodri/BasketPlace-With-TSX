@@ -65,7 +65,7 @@ export const Register: React.FC<Props> = ({ }) => {
             <h2 >Sign Up</h2>
             <Form onSubmit={handleSubmit}>
                 <Form.Group controlId="name">
-                    <Form.Label>First Name</Form.Label>
+                    <Form.Label>Nombre</Form.Label>
                     <Form.Control
                         type="text"
                         name="nombre"
@@ -76,7 +76,7 @@ export const Register: React.FC<Props> = ({ }) => {
                 </Form.Group>
 
                 <Form.Group controlId="lastName" className="mt-2">
-                    <Form.Label>Last Name</Form.Label>
+                    <Form.Label>Apellido</Form.Label>
                     <Form.Control
                         type="text"
                         name="apellido"
