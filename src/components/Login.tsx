@@ -5,6 +5,10 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { User } from "../types/User";
 import {  useAuth } from "../context/AuthContext";
+import { Home } from "./Home";
+import TweetBox from "./PostBox";
+import { AlignCenter } from "react-bootstrap-icons";
+import PostBox from "./PostBox";
 
 interface Props {
     onLogin: (formData: User) => void;
@@ -38,42 +42,45 @@ export const Login: React.FC<Props> = () => {
     };
 
     return (
-        <Container className="mt-5 pt-3" style={{ maxWidth: "400px" }}>
+        <Container className="mt-5 pt-5">
             {
             isAuthenticated ? ( // Verificar el estado del usuario desde el contexto
-                <div className="text-center">
-                    <h2>Bienvenido</h2>
-                </div>
+                <Container className="mt-0 pt-0" style={{ maxWidth: "600px" }}>
+                    <PostBox/>
+                </Container>
             ) : (
                 <>
-                    <h2>Login</h2>
-                    <Form onSubmit={handleSubmit}>
-                        <Form.Group controlId="email">
-                            <Form.Label>Email</Form.Label>
-                            <Form.Control
-                                type="email"
-                                name="email"
-                                value={formData.email}
-                                onChange={handleChange}
-                                required
-                            />
-                        </Form.Group>
+                    <Container className="mt-0 pt-0" style={{ maxWidth: "400px" }}>
+                        <h2>Login</h2>
+                        <Form onSubmit={handleSubmit}>
+                            <Form.Group controlId="email">
+                                <Form.Label>Email</Form.Label>
+                                <Form.Control
+                                    type="email"
+                                    name="email"
+                                    value={formData.email}
+                                    onChange={handleChange}
+                                    required
+                                />
+                            </Form.Group>
 
-                        <Form.Group controlId="password" className="mt-2">
-                            <Form.Label>Password</Form.Label>
-                            <Form.Control
-                                type="password"
-                                name="password"
-                                value={formData.password}
-                                onChange={handleChange}
-                                required
-                            />
-                        </Form.Group>
+                            <Form.Group controlId="password" className="mt-2">
+                                <Form.Label>Password</Form.Label>
+                                <Form.Control
+                                    type="password"
+                                    name="password"
+                                    value={formData.password}
+                                    onChange={handleChange}
+                                    required
+                                />
+                            </Form.Group>
 
-                        <Button variant="primary" type="submit" className="mt-3">
-                            Login
-                        </Button>
-                    </Form>
+                            <Button variant="primary" type="submit" className="mt-3">
+                                Login
+                            </Button>
+                        </Form>
+                    </Container>
+                    
                 </>
             )}
             <ToastContainer 

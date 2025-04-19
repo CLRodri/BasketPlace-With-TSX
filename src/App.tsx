@@ -6,6 +6,7 @@ import { Register } from './components/Register';
 import Login from './components/Login';
 import { Profile } from './components/Profile';
 import { AuthProvider } from './context/AuthContext';
+import { Home } from './components/Home';
 
 function App() {
   return (
@@ -13,7 +14,7 @@ function App() {
       <div className='container'>
         <Nav />
         <Routes>
-          <Route path={URLS.HOME} element="" />
+          <Route path={URLS.HOME} element={<Home/>} />
           <Route path={URLS.ABOUT} element="" />
           <Route path={URLS.CONTACT} element="" />
           <Route path={URLS.LOGIN} element={<Login onLogin={data} />} />
