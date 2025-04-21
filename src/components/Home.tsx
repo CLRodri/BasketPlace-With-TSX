@@ -1,5 +1,6 @@
 import { Button, Form } from "react-bootstrap";
 import { Container } from "react-bootstrap";
+import PostBox from "./PostBox";
 
 export const Home: React.FC = () => {
 
@@ -11,8 +12,8 @@ export const Home: React.FC = () => {
 
     //Aqui va la logica para mostrar las ofertas de equipos
     return (
-        <Container className="mt-5 pt-3">
-            
+        <Container className="mt-5 pt-3" style={{ maxWidth: '600' }}>
+            <PostBox/>
         </Container>
 
     );

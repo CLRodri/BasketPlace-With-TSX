@@ -25,6 +25,7 @@ db.exec(`
   )
 `);
 
+
 const SECRET_KEY='secretkey';
 
 app.post("/api/register", (req: Request, res: Response) => {
@@ -58,6 +59,30 @@ app.post("/api/login", (req: Request, res: Response) => {
     res.status(500).json("Usuario o contraseña incorrectos");
   }
 }); 
+
+db.exec(`
+  CREATE TABLE IF NOT EXISTS posts (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    titulo TEXT NOT NULL,
+    texto TEXT NOT NULL,
+    fechaPublicacion TEXT NOT NULL,
+    autor TEXT NOT NULL
+  )
+`);
+
+app.post("/api/createPost", (req: Request, res: Response) => {
+  const { titulo, texto,fechaPublicacion,autor } = req.body;
+  try {
+    const stmt = db.prepare(
+      `INSERT INTO posts  ( titulo, texto, fechaPublicacion, autor) VALUES (?, ?, ?, ?)`
+    );
+    stmt.run(titulo, texto,fechaPublicacion,autor);
+    res.json({ message: "Publicación registrada con éxito" });
+  } catch (error) {
+    res.status(500).json({ error: "Error al registrar la publicación" });
+  }
+});
+
 
 
 // Iniciar servidor en el puerto 5000
